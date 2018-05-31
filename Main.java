@@ -5,7 +5,7 @@ public class Main {
 	static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";  
 	static String DB_URL = "jdbc:mysql://localhost/";
 
-	   //  Database credentials
+	//  Database credentials
 	static final String USER = "root";
 	static final String PASS = "123456";
 	   
@@ -62,7 +62,8 @@ public class Main {
 			//Songs
 			sql = "CREATE TABLE Songs " +
 					"(id INT UNSIGNED AUTO_INCREMENT, " +
-					" SongName VARCHAR(255), " + 
+					" SongName VARCHAR(255) NOT NULL," +
+					" DateRealease DATETIME, " +
 					" PRIMARY KEY ( id ))"; 
 			
 			stmt.executeUpdate(sql);
@@ -71,7 +72,7 @@ public class Main {
 			//Albums
 			sql = "CREATE TABLE Albums " +
 					"(id INT UNSIGNED AUTO_INCREMENT, " +
-					" AlbumName VARCHAR(255), " + 
+					" AlbumName VARCHAR(255) NOT NULL, " + 
 					" NumSubscribed int, " + 
 					" PRIMARY KEY ( id ))"; 
 			
@@ -81,7 +82,7 @@ public class Main {
 			//Artists
 			sql = "CREATE TABLE Artists " +
 					"(id INT UNSIGNED AUTO_INCREMENT, " +
-					" ArtistName VARCHAR(255), " + 
+					" ArtistName VARCHAR(255) NOT NULL, " + 
 					" NumSonsgs int, " + 
 					" PRIMARY KEY ( id ))"; 
 			
@@ -91,9 +92,9 @@ public class Main {
 			//Playlist
 			sql = "CREATE TABLE Playlists " +
 					"(id INT UNSIGNED AUTO_INCREMENT, " +
-					" Song_id int, " +
-					" Artist_id int, " + 
-					" Album_id int, " +
+					" Song_id int NOT NULL, " +
+					" Artist_id int NOT NULL, " + 
+					" Album_id int NOT NULL, " +
 					" PRIMARY KEY ( id ))" +
 					"FOREIGN KEY (Song_id) REFERENCES Songs(id)" +
 					"FOREIGN KEY (Album_id) REFERENCES Albums(id)" +
