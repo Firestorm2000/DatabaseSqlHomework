@@ -1,4 +1,3 @@
-import Create;
 import java.sql.*;
 import java.util.Scanner;
 
@@ -17,9 +16,9 @@ public class Main {
 		System.out.println("2 - Albums");
 		System.out.println("3 - Artists");
 		Scanner scn = new Scanner(System.in);
-		int Table = scn.nextInt();
+		int table = scn.nextInt();
 		
-		if(Table >= 1 && Table <= 3){
+		if(table >= 1 && table <= 3){
 			System.out.println("What to do:");
 			System.out.println("1 - Create");
 			System.out.println("2 - Read");
@@ -33,21 +32,18 @@ public class Main {
 		
 		if(table == 1 && crud == 1) {
 			System.out.println("Song:");
-			System.in.read();
 			System.out.println("Release Date:");
-			Create.CreateSong(scn.nextLine(), scn.nextLine());
+			Create.CreateSongs(scn.nextLine(), scn.nextLine());
 		}
 		if(table == 2 && crud == 1) {
 			System.out.println("Album:");
-			System.in.read()
 			System.out.println("Number of Subscriptions:");
-			Create.CreateAlbum(scn.nextLine(), scn.nextLine());
+			Create.CreateAlbums(scn.nextInt(), scn.nextLine());
 		}
 		if(table == 3 && crud == 1) {
 			System.out.println("Artist:");
-			System.in.read()
 			System.out.println("Number of Songs:");
-			Create.CreateArtist(scn.nextLine(), scn.nextLine());
+			Create.CreateArtist(scn.nextInt(), scn.nextLine());
 		}
 		if(table == 1 && crud == 2) {
 			Read.ReadSongs();

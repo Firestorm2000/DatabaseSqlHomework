@@ -16,7 +16,7 @@ public class Read {
 
 
 			
-			public void ReadAlbums() {
+			static public void ReadAlbums() {
 				Connection conn = null;
 				Statement stmt = null;
 				try {
@@ -61,7 +61,7 @@ public class Read {
 					}
 				}
 			}
-			public void ReadSongs() {
+			static public void ReadSongs() {
 				Connection conn = null;
 				Statement stmt = null;
 				try {
@@ -107,7 +107,7 @@ public class Read {
 					}
 				}
 			}
-			public void ReadArtists() {
+			static public void ReadArtists() {
 				Connection conn = null;
 				Statement stmt = null;
 				try {

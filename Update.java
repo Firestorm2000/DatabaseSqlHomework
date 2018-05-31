@@ -14,7 +14,7 @@ public class Update {
 
 
 		
-		public void UpdateAlbum(String name,int id) {
+		static public void UpdateAlbum(String name,int id) {
 			Connection conn = null;
 			Statement stmt = null;
 			try {
@@ -52,7 +52,7 @@ public class Update {
 				}
 			}
 		}
-		public void UpdateSong(String name,int id) {
+		static public void UpdateSong(String name,int id) {
 			Connection conn = null;
 			Statement stmt = null;
 			try {
@@ -90,7 +90,7 @@ public class Update {
 				}
 			}
 		}
-		public void UpdateArtist(String name,int id) {
+		static public void UpdateArtist(String name,int id) {
 			Connection conn = null;
 			Statement stmt = null;
 			try {

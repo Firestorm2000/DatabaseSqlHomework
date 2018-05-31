@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.text.SimpleDateFormat;
 
 public class Create {
 
@@ -10,14 +11,14 @@ static String DB_URL = "jdbc:mysql://localhost/";
 static final String USER = "root";
 static final String PASS = "123456";
 
-public void CreateSongs(Date date,String song) {
+static public void CreateSongs(String date,String song) {
 		Connection conn = null;
 		Statement stmt = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection(DB_URL,USER,PASS);
 			String sql = null;
-			Date DateRelease = date;
+			Date DateRelease =SimpleDateFormat.parse(date);
 			String SongName = song;
 			stmt = conn.createStatement();
 			
@@ -50,7 +51,7 @@ public void CreateSongs(Date date,String song) {
 		}
 	}
 
-public void CreateArtist(int numberSongs,String name) {
+static public void CreateArtist(int numberSongs,String name) {
 	Connection conn = null;
 	Statement stmt = null;
 	try {
@@ -89,7 +90,7 @@ public void CreateArtist(int numberSongs,String name) {
 		}
 	}
 }
-public void CreateAlbums(int numberSubcribed,String name) {
+static public void CreateAlbums(int numberSubcribed,String name) {
 	Connection conn = null;
 	Statement stmt = null;
 	try {
@@ -97,10 +98,9 @@ public void CreateAlbums(int numberSubcribed,String name) {
 		conn = DriverManager.getConnection(DB_URL,USER,PASS);
 		String sql = null;
 		int number = numberSubcribed;
-		String albumName = name;
 		stmt = conn.createStatement();
 		
-		sql = "INSERT INTO Songs VALUES ('"+albumName+"' , '"+number+"' )";
+		sql = "INSERT INTO Songs VALUES ('"+name+"' , '"+number+"' )";
 		stmt.executeUpdate(sql);
 		System.out.println("Artists Updated");
 		

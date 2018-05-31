@@ -14,7 +14,7 @@ public class Delete {
 
 
 		
-		public void DeleteAlbum(String name) {
+		static public void DeleteAlbum(String name) {
 			Connection conn = null;
 			Statement stmt = null;
 			try {
@@ -52,7 +52,7 @@ public class Delete {
 				}
 			}
 		}
-		public void DeleteArtist(String name) {
+		static public void DeleteArtist(String name) {
 			Connection conn = null;
 			Statement stmt = null;
 			try {
@@ -90,7 +90,7 @@ public class Delete {
 				}
 			}
 		}
-		public void DeleteSong(String name) {
+		static public void DeleteSong(String name) {
 			Connection conn = null;
 			Statement stmt = null;
 			try {
