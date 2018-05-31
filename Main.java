@@ -1,15 +1,67 @@
+import Create;
 import java.sql.*;
+import java.util.Scanner;
 
 public class Main {
 	// JDBC driver name and database URL
 	static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";  
 	static String DB_URL = "jdbc:mysql://localhost/";
 
-	//  Database credentials
+	   //  Database credentials
 	static final String USER = "root";
 	static final String PASS = "123456";
 	   
 	public static void main(String[] args){
+		int table;
+		System.out.println("Which Table to use:");
+		System.out.println("1 - Songs");
+		System.out.println("2 - Albums");
+		System.out.println("3 - Artists");
+		Scanner scn = new Scanner(System.in);
+		int Table = scn.nextInt();
+		
+		if(Table >= 1 && Table <= 3){
+			System.out.println("What to do:");
+			System.out.println("1 - Create");
+			System.out.println("2 - Read");
+			System.out.println("3 - Update");
+			System.out.println("4 - Delete");
+		}else {
+			System.out.println("Wrong number!");
+		}
+		
+		int crud = scn.nextInt();
+		
+		if(table == 1 && crud == 1) {
+			System.out.println("Song:");
+			System.in.read()
+			System.out.println("Release Date:");
+			Create.CreateSong(scn.nextLine(), scn.nextLine());
+		}
+		if(table == 2 && crud == 1) {
+			System.out.println("Album:");
+			System.in.read()
+			System.out.println("Number of Subscriptions:");
+			Create.CreateAlbum(scn.nextLine(), scn.nextLine());
+		}
+		if(table == 3 && crud == 1) {
+			System.out.println("Artist:");
+			System.in.read()
+			System.out.println("Number of Songs:");
+			Create.CreateArtist(scn.nextLine(), scn.nextLine());
+		}
+		if(table == 1 && crud == 2) {
+			Read.ReadSongs();
+		}
+		if(table == 2 && crud == 2) {
+			Read.ReadAlbums();
+		}
+		if(table == 3 && crud == 2) {
+			Read.ReadArtists();
+		}
+		
+		scn.close();
+		
 		Connection conn = null;
 		Statement stmt = null;
 		try {
@@ -62,8 +114,7 @@ public class Main {
 			//Songs
 			sql = "CREATE TABLE Songs " +
 					"(id INT UNSIGNED AUTO_INCREMENT, " +
-					" SongName VARCHAR(255) NOT NULL," +
-					" DateRealease DATETIME, " +
+					" SongName VARCHAR(255), " + 
 					" PRIMARY KEY ( id ))"; 
 			
 			stmt.executeUpdate(sql);
@@ -72,7 +123,7 @@ public class Main {
 			//Albums
 			sql = "CREATE TABLE Albums " +
 					"(id INT UNSIGNED AUTO_INCREMENT, " +
-					" AlbumName VARCHAR(255) NOT NULL, " + 
+					" AlbumName VARCHAR(255), " + 
 					" NumSubscribed int, " + 
 					" PRIMARY KEY ( id ))"; 
 			
@@ -82,7 +133,7 @@ public class Main {
 			//Artists
 			sql = "CREATE TABLE Artists " +
 					"(id INT UNSIGNED AUTO_INCREMENT, " +
-					" ArtistName VARCHAR(255) NOT NULL, " + 
+					" ArtistName VARCHAR(255), " + 
 					" NumSonsgs int, " + 
 					" PRIMARY KEY ( id ))"; 
 			
@@ -92,9 +143,9 @@ public class Main {
 			//Playlist
 			sql = "CREATE TABLE Playlists " +
 					"(id INT UNSIGNED AUTO_INCREMENT, " +
-					" Song_id int NOT NULL, " +
-					" Artist_id int NOT NULL, " + 
-					" Album_id int NOT NULL, " +
+					" Song_id int, " +
+					" Artist_id int, " + 
+					" Album_id int, " +
 					" PRIMARY KEY ( id ))" +
 					"FOREIGN KEY (Song_id) REFERENCES Songs(id)" +
 					"FOREIGN KEY (Album_id) REFERENCES Albums(id)" +
