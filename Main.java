@@ -12,7 +12,6 @@ public class Main {
 	static final String PASS = "123456";
 	   
 	public static void main(String[] args){
-		int table;
 		System.out.println("Which Table to use:");
 		System.out.println("1 - Songs");
 		System.out.println("2 - Albums");
@@ -34,7 +33,7 @@ public class Main {
 		
 		if(table == 1 && crud == 1) {
 			System.out.println("Song:");
-			System.in.read()
+			System.in.read();
 			System.out.println("Release Date:");
 			Create.CreateSong(scn.nextLine(), scn.nextLine());
 		}
