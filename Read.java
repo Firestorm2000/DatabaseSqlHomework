@@ -1,5 +1,6 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -25,7 +26,16 @@ public class Read {
 					stmt = conn.createStatement();
 					
 					sql ="SELECT AlbumName, NumSubscribed  FROM Artists";
-					stmt.executeUpdate(sql);
+					ResultSet rs=stmt.executeQuery(sql);
+					while(rs.next()){
+				         //Retrieve by column name
+				         int NumSubscribed = rs.getInt("NumSubscribed");
+				         String name = rs.getString("AlbumName");
+				         //Display values
+				         System.out.print("Number subcribed : " + NumSubscribed);
+				         System.out.print(", Name: " + name);
+				      }
+				      rs.close();
 					
 					
 				} catch(SQLException se) {
@@ -61,7 +71,17 @@ public class Read {
 					stmt = conn.createStatement();
 					
 					sql ="SELECT SongName, DateRealease FROM Songs";
-					stmt.executeUpdate(sql);
+					ResultSet rs=stmt.executeQuery(sql);
+					while(rs.next()){
+				         //Retrieve by column name
+				         int DateRealease = rs.getInt("DateRealease");
+				         String name = rs.getString("SongName");
+				         //Display values
+				         System.out.print("DateRealease : " + DateRealease);
+				         System.out.print(", Name: " + name);
+				      }
+				      rs.close();
+					
 					
 					
 				} catch(SQLException se) {
@@ -97,8 +117,16 @@ public class Read {
 					stmt = conn.createStatement();
 					
 					sql ="SELECT ArtistName,NumSonsgs  FROM Artist";
-					stmt.executeUpdate(sql);
-					
+					ResultSet rs=stmt.executeQuery(sql);
+					while(rs.next()){
+				         //Retrieve by column name
+				         int NumSonsgs = rs.getInt("NumSonsgs");
+				         String name = rs.getString("ArtistName");
+				         //Display values
+				         System.out.print("Number of songs : " + NumSonsgs);
+				         System.out.print(", Name: " + name);
+				      }
+				      rs.close();
 					
 				} catch(SQLException se) {
 					se.printStackTrace();
