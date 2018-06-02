@@ -3,14 +3,17 @@ import java.util.Scanner;
 
 public class Main {
 	// JDBC driver name and database URL
-	static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";  
-	static String DB_URL = "jdbc:mysql://localhost/";
+	public static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";  
+	public static String DB_URL = "jdbc:mysql://localhost/music";
 
 	   //  Database credentials
-	static final String USER = "root";
-	static final String PASS = "123456";
+	public static final String USER = "root";
+	public static final String PASS = "123456";
 	   
 	public static void main(String[] args){
+		//DropDB();  //Drops Database
+		//CreateDB();  //Creates Database with Tables
+		
 		System.out.println("Which Table to use:");
 		System.out.println("1 - Songs");
 		System.out.println("2 - Albums");
@@ -37,8 +40,9 @@ public class Main {
 		}
 		if(table == 2 && crud == 1) {
 			System.out.println("Album:");
+			String tmp = scn.nextLine();
 			System.out.println("Number of Subscriptions:");
-			Create.CreateAlbums(scn.nextInt(), scn.nextLine());
+			Create.CreateAlbums(tmp, scn.nextInt());
 		}
 		if(table == 3 && crud == 1) {
 			System.out.println("Artist:");
@@ -60,8 +64,6 @@ public class Main {
 		Connection conn = null;
 		Statement stmt = null;
 		try {
-			//DropDB();  //Drops Database
-			//CreateDB();  //Creates Database with Tables
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection(DB_URL,USER,PASS);
 			
@@ -103,10 +105,14 @@ public class Main {
 			String sql = "CREATE DATABASE Music";
 			stmt.executeUpdate(sql);
 			System.out.println("DB Created");
-			DB_URL += "music";
+			DB_URL = "jdbc:mysql://localhost/music";
+			conn.close();
+			stmt.close();
 			
 			//Tables Creation
 			//Songs
+			conn = DriverManager.getConnection(DB_URL,USER,PASS);
+			stmt = conn.createStatement();
 			sql = "CREATE TABLE Songs " +
 					"(id INT UNSIGNED AUTO_INCREMENT, " +
 					" SongName VARCHAR(255), " + 
@@ -114,18 +120,22 @@ public class Main {
 			
 			stmt.executeUpdate(sql);
 			System.out.println("Created Table Songs");
+			stmt.close();
 			
 			//Albums
+			stmt = conn.createStatement();
 			sql = "CREATE TABLE Albums " +
 					"(id INT UNSIGNED AUTO_INCREMENT, " +
-					" AlbumName VARCHAR(255), " + 
+					" AlbumName VARCHAR(255),2 " + 
 					" NumSubscribed int, " + 
 					" PRIMARY KEY ( id ))"; 
 			
 			stmt.executeUpdate(sql);
 			System.out.println("Created Table Albums");
+			stmt.close();
 			
 			//Artists
+			stmt = conn.createStatement();
 			sql = "CREATE TABLE Artists " +
 					"(id INT UNSIGNED AUTO_INCREMENT, " +
 					" ArtistName VARCHAR(255), " + 
@@ -134,21 +144,26 @@ public class Main {
 			
 			stmt.executeUpdate(sql);
 			System.out.println("Created Table Artists");
+			stmt.close();
 			
 			//Playlist
+			stmt = conn.createStatement();
 			sql = "CREATE TABLE Playlists " +
 					"(id INT UNSIGNED AUTO_INCREMENT, " +
-					" Song_id int, " +
-					" Artist_id int, " + 
-					" Album_id int, " +
-					" PRIMARY KEY ( id ))" +
-					"FOREIGN KEY (Song_id) REFERENCES Songs(id)" +
-					"FOREIGN KEY (Album_id) REFERENCES Albums(id)" +
-					"FOREIGN KEY (Artist_id) REFERENCES Artists(id)"; 
+					" Song_id int unsigned, " +
+					" Artist_id int unsigned, " + 
+					" Album_id int unsigned, " +
+					" PRIMARY KEY ( id )," +
+					" FOREIGN KEY (Song_id) "
+					+ "REFERENCES Songs(id)," +
+					" FOREIGN KEY (Album_id)"
+					+ " REFERENCES Albums(id)," +
+					" FOREIGN KEY (Artist_id)"
+					+ " REFERENCES Artists(id)) ";
 			
 			stmt.executeUpdate(sql);
 			System.out.println("Created Table Playlists");
-			
+			stmt.close();
 		} catch(SQLException se) {
 			se.printStackTrace();
 		} catch (ClassNotFoundException e) {

@@ -4,22 +4,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Update {
-	// JDBC driver name and database URL
-	static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";  
-	static String DB_URL = "jdbc:mysql://localhost/";
-
-	//  Database credentials
-	static final String USER = "root";
-	static final String PASS = "123456";
-
-
 		
 		static public void UpdateAlbum(String name,int id) {
 			Connection conn = null;
 			Statement stmt = null;
 			try {
-				Class.forName("com.mysql.cj.jdbc.Driver");
-				conn = DriverManager.getConnection(DB_URL,USER,PASS);
+				Class.forName(Main.JDBC_DRIVER);
+	            conn = DriverManager.getConnection(Main.DB_URL,Main.USER,Main.PASS);
 				String sql = null;
 				stmt = conn.createStatement();
 				
@@ -56,8 +47,8 @@ public class Update {
 			Connection conn = null;
 			Statement stmt = null;
 			try {
-				Class.forName("com.mysql.cj.jdbc.Driver");
-				conn = DriverManager.getConnection(DB_URL,USER,PASS);
+				Class.forName(Main.JDBC_DRIVER);
+	            conn = DriverManager.getConnection(Main.DB_URL,Main.USER,Main.PASS);
 				String sql = null;
 				stmt = conn.createStatement();
 				
@@ -94,8 +85,8 @@ public class Update {
 			Connection conn = null;
 			Statement stmt = null;
 			try {
-				Class.forName("com.mysql.cj.jdbc.Driver");
-				conn = DriverManager.getConnection(DB_URL,USER,PASS);
+				Class.forName(Main.JDBC_DRIVER);
+	            conn = DriverManager.getConnection(Main.DB_URL,Main.USER,Main.PASS);
 				String sql = null;
 				stmt = conn.createStatement();
 				

@@ -3,22 +3,14 @@ import java.text.SimpleDateFormat;
 
 public class Create {
 
-// JDBC driver name and database URL
-static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";  
-static String DB_URL = "jdbc:mysql://localhost/";
-
-//  Database credentials
-static final String USER = "root";
-static final String PASS = "123456";
-
 static public void CreateSongs(String date,String song) {
 		Connection conn = null;
 		Statement stmt = null;
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection(DB_URL,USER,PASS);
+			Class.forName(Main.JDBC_DRIVER);
+            conn = DriverManager.getConnection(Main.DB_URL,Main.USER,Main.PASS);
 			String sql = null;
-			Date DateRelease =SimpleDateFormat.parse(date);
+			Date DateRelease = SimpleDateFormat.parse(date);
 			String SongName = song;
 			stmt = conn.createStatement();
 			
@@ -55,8 +47,8 @@ static public void CreateArtist(int numberSongs,String name) {
 	Connection conn = null;
 	Statement stmt = null;
 	try {
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		conn = DriverManager.getConnection(DB_URL,USER,PASS);
+		Class.forName(Main.JDBC_DRIVER);
+        conn = DriverManager.getConnection(Main.DB_URL,Main.USER,Main.PASS);
 		String sql = null;
 		int numberOfSongs = numberSongs;
 		String artistName = name;
@@ -64,7 +56,7 @@ static public void CreateArtist(int numberSongs,String name) {
 		
 		sql = "INSERT INTO Songs VALUES ('"+artistName+"' , '"+numberOfSongs+"' )";
 		stmt.executeUpdate(sql);
-		System.out.println("Artists Updated");
+		System.out.println("Artist Created");
 		
 		
 	} catch(SQLException se) {
@@ -90,19 +82,19 @@ static public void CreateArtist(int numberSongs,String name) {
 		}
 	}
 }
-static public void CreateAlbums(int numberSubcribed,String name) {
+static public void CreateAlbums(String name, int numberSubcribed) {
 	Connection conn = null;
 	Statement stmt = null;
 	try {
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		conn = DriverManager.getConnection(DB_URL,USER,PASS);
+		Class.forName(Main.JDBC_DRIVER);
+        conn = DriverManager.getConnection(Main.DB_URL,Main.USER,Main.PASS);
 		String sql = null;
 		int number = numberSubcribed;
 		stmt = conn.createStatement();
 		
-		sql = "INSERT INTO Songs VALUES ('"+name+"' , '"+number+"' )";
+		sql = "INSERT INTO Albums (AlbumName, NumSubscribed) VALUES ('"+name+"' , '"+number+"' )";
 		stmt.executeUpdate(sql);
-		System.out.println("Artists Updated");
+		System.out.println("Album Created");
 		
 		
 	} catch(SQLException se) {
